@@ -1,0 +1,2380 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package project_trial;
+
+import com.toedter.calendar.JMonthChooser;
+import java.awt.Color;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import net.proteanit.sql.DbUtils;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartFrame;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PiePlot3D;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultPieDataset;
+
+/**
+ *
+ * @author MN
+ */
+public class AdminMain extends javax.swing.JFrame {
+
+    public AdminMain() {
+        initComponents();
+    }
+    int select_flag = 0;
+    int member_flag = 0;
+    int gym_flag = 0;
+
+    private void updateTable() {
+
+        try {
+
+            Class.forName("com.mysql.jdbc.Driver");
+            database = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/kazi_gym", "root", "");
+
+            String sql = "select *from equipment";
+            PreparedStatement p = database.prepareStatement(sql);
+            ResultSet ans = p.executeQuery();
+            jTable3.setModel(DbUtils.resultSetToTableModel(ans));
+            ans.close();
+            p.close();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+
+    }
+
+    private void updateTable2() {
+
+        try {
+
+            Class.forName("com.mysql.jdbc.Driver");
+            database = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/kazi_gym", "root", "");
+
+            String sql = "select *from trainer_details";
+            PreparedStatement p = database.prepareStatement(sql);
+            ResultSet ans = p.executeQuery();
+            jTable2.setModel(DbUtils.resultSetToTableModel(ans));
+            ans.close();
+            p.close();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+
+    }
+
+    private void updateTable3() {
+
+        try {
+
+            Class.forName("com.mysql.jdbc.Driver");
+            database = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/kazi_gym", "root", "");
+
+            String sql = "select  id,firstname,mobile,bg,package,tr_name,bill from member_info";
+            PreparedStatement p = database.prepareStatement(sql);
+            ResultSet ans = p.executeQuery();
+            jTable1.setModel(DbUtils.resultSetToTableModel(ans));
+            ans.close();
+            p.close();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+
+    }
+
+    private void updateTable4() {
+
+        try {
+
+            Class.forName("com.mysql.jdbc.Driver");
+            database = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/kazi_gym", "root", "");
+
+            String sql = "select *from bill_info";
+            PreparedStatement p = database.prepareStatement(sql);
+            ResultSet ans = p.executeQuery();
+            jTable4.setModel(DbUtils.resultSetToTableModel(ans));
+            ans.close();
+            p.close();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+
+    }
+
+    private String SelectMonth() {
+        String m = null;
+
+        if (month.getMonth() == 0) {
+            m = "January";
+        }
+        if (month.getMonth() == 1) {
+            m = "February";
+        }
+        if (month.getMonth() == 2) {
+            m = "March";
+        }
+        if (month.getMonth() == 3) {
+            m = "April";
+        }
+        if (month.getMonth() == 4) {
+            m = "May";
+        }
+        if (month.getMonth() == 5) {
+            m = "June";
+        }
+        if (month.getMonth() == 6) {
+            m = "July";
+        }
+        if (month.getMonth() == 7) {
+            m = "August";
+        }
+        if (month.getMonth() == 8) {
+            m = "September";
+        }
+        if (month.getMonth() == 9) {
+            m = "October";
+        }
+        if (month.getMonth() == 10) {
+            m = "November";
+        }
+        if (month.getMonth() == 11) {
+            m = "December";
+        }
+
+        return m;
+
+    }
+
+    public Connection database;
+    int button = 0;
+    int button2 = 0;
+    int button3 = 0;
+    int button4 = 0;
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        pane = new javax.swing.JTabbedPane();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel30 = new javax.swing.JLabel();
+        jLabel31 = new javax.swing.JLabel();
+        jLabel32 = new javax.swing.JLabel();
+        jLabel33 = new javax.swing.JLabel();
+        jLabel34 = new javax.swing.JLabel();
+        nid = new javax.swing.JTextField();
+        mobile = new javax.swing.JTextField();
+        weight = new javax.swing.JTextField();
+        gender = new javax.swing.JTextField();
+        l_name = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel36 = new javax.swing.JLabel();
+        jLabel37 = new javax.swing.JLabel();
+        jLabel38 = new javax.swing.JLabel();
+        jLabel39 = new javax.swing.JLabel();
+        f_name = new javax.swing.JTextField();
+        age = new javax.swing.JTextField();
+        height = new javax.swing.JTextField();
+        bg = new javax.swing.JTextField();
+        email = new javax.swing.JTextField();
+        pic = new javax.swing.JLabel();
+        ad_out = new javax.swing.JButton();
+        jLabel41 = new javax.swing.JLabel();
+        show_pass = new javax.swing.JLabel();
+        jLabel42 = new javax.swing.JLabel();
+        trainer = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        jButton2 = new javax.swing.JButton();
+        T_Update_Btn = new javax.swing.JButton();
+        tid = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        tpost = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        tab = new javax.swing.JTextField();
+        ttime = new javax.swing.JTextField();
+        tbill = new javax.swing.JTextField();
+        T_Select_btn = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        T_Clear_btn = new javax.swing.JButton();
+        tcom = new javax.swing.JTextField();
+        jButton6 = new javax.swing.JButton();
+        T_delete_btn = new javax.swing.JButton();
+        jLabel15 = new javax.swing.JLabel();
+        tname = new javax.swing.JTextField();
+        jLabel44 = new javax.swing.JLabel();
+        jButton8 = new javax.swing.JButton();
+        jLabel45 = new javax.swing.JLabel();
+        member = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+        m_del_btn = new javax.swing.JButton();
+        m_update_btn = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        mid = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
+        mcom = new javax.swing.JTextField();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        mpac = new javax.swing.JTextField();
+        mbg = new javax.swing.JTextField();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        mtra = new javax.swing.JTextField();
+        mbill = new javax.swing.JTextField();
+        m_select_btn = new javax.swing.JButton();
+        m_clr_btn = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
+        jLabel46 = new javax.swing.JLabel();
+        equip = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable3 = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        Select_btn = new javax.swing.JButton();
+        Show_btn = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        uname = new javax.swing.JTextField();
+        uqn = new javax.swing.JTextField();
+        ucon = new javax.swing.JTextField();
+        uprb = new javax.swing.JTextField();
+        user = new javax.swing.JTextField();
+        Add_btn = new javax.swing.JButton();
+        Update_Btn = new javax.swing.JButton();
+        Delete_btn = new javax.swing.JButton();
+        Clear_btn = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jLabel47 = new javax.swing.JLabel();
+        bill = new javax.swing.JPanel();
+        pie = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTable4 = new javax.swing.JTable();
+        tp = new javax.swing.JTextField();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        cb = new javax.swing.JTextField();
+        jLabel23 = new javax.swing.JLabel();
+        ib = new javax.swing.JTextField();
+        jLabel24 = new javax.swing.JLabel();
+        wb = new javax.swing.JTextField();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
+        ne = new javax.swing.JTextField();
+        ac = new javax.swing.JTextField();
+        r = new javax.swing.JTextField();
+        o = new javax.swing.JTextField();
+        equal = new javax.swing.JButton();
+        total = new javax.swing.JTextField();
+        jLabel29 = new javax.swing.JLabel();
+        b_select_bn = new javax.swing.JButton();
+        month = new com.toedter.calendar.JMonthChooser();
+        b_update_btn = new javax.swing.JButton();
+        b_show_btn = new javax.swing.JButton();
+        b_add_btn = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jLabel43 = new javax.swing.JLabel();
+        jButton5 = new javax.swing.JButton();
+        jLabel48 = new javax.swing.JLabel();
+        jLabel49 = new javax.swing.JLabel();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Admin Desk");
+        setBackground(new java.awt.Color(255, 0, 0));
+        setBounds(new java.awt.Rectangle(100, 20, 0, 0));
+        setMinimumSize(new java.awt.Dimension(1200, 700));
+        setPreferredSize(new java.awt.Dimension(1200, 700));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        pane.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                paneMouseClicked(evt);
+            }
+        });
+
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel30.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        jLabel30.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel30.setText(" Name");
+        jLabel30.setToolTipText("");
+        jPanel2.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, -1));
+
+        jLabel31.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        jLabel31.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel31.setText("Age");
+        jPanel2.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, -1, -1));
+
+        jLabel32.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        jLabel32.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel32.setText("Height(cm)");
+        jPanel2.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, -1, -1));
+
+        jLabel33.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        jLabel33.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel33.setText("Blood Group");
+        jPanel2.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 410, -1, -1));
+
+        jLabel34.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        jLabel34.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel34.setText("Email");
+        jPanel2.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 510, -1, -1));
+
+        nid.setEditable(false);
+        nid.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
+        nid.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                nidMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                nidMouseExited(evt);
+            }
+        });
+        jPanel2.add(nid, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 500, 200, 40));
+
+        mobile.setEditable(false);
+        mobile.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
+        mobile.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                mobileMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                mobileMouseExited(evt);
+            }
+        });
+        jPanel2.add(mobile, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 410, 200, 40));
+
+        weight.setEditable(false);
+        weight.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
+        jPanel2.add(weight, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 330, 200, 40));
+
+        gender.setEditable(false);
+        gender.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
+        jPanel2.add(gender, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 250, 200, 40));
+
+        l_name.setEditable(false);
+        l_name.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
+        l_name.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                l_nameActionPerformed(evt);
+            }
+        });
+        jPanel2.add(l_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 180, 200, 40));
+
+        jLabel3.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("ID");
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 180, 107, 31));
+
+        jLabel36.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        jLabel36.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel36.setText(" Gender (M/F)");
+        jLabel36.setToolTipText("");
+        jPanel2.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 260, -1, -1));
+
+        jLabel37.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        jLabel37.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel37.setText("Weight(kg)");
+        jLabel37.setToolTipText("");
+        jPanel2.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 340, -1, -1));
+
+        jLabel38.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        jLabel38.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel38.setText("Mobile");
+        jLabel38.setToolTipText("");
+        jPanel2.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 420, 80, -1));
+
+        jLabel39.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        jLabel39.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel39.setText("NID");
+        jPanel2.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 510, -1, -1));
+
+        f_name.setEditable(false);
+        f_name.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
+        jPanel2.add(f_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 180, 200, 40));
+
+        age.setEditable(false);
+        age.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
+        jPanel2.add(age, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 250, 200, 40));
+
+        height.setEditable(false);
+        height.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
+        height.setToolTipText("");
+        jPanel2.add(height, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 330, 200, 40));
+
+        bg.setEditable(false);
+        bg.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
+        bg.setToolTipText("");
+        bg.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                bgMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                bgMouseExited(evt);
+            }
+        });
+        jPanel2.add(bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 410, 200, 40));
+
+        email.setEditable(false);
+        email.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
+        email.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                emailMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                emailMouseExited(evt);
+            }
+        });
+        email.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                emailActionPerformed(evt);
+            }
+        });
+        jPanel2.add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 500, 210, 40));
+
+        pic.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        pic.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)));
+        jPanel2.add(pic, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 110, 250, 240));
+
+        ad_out.setBackground(new java.awt.Color(0, 0, 0));
+        ad_out.setFont(new java.awt.Font("Niagara Engraved", 1, 18)); // NOI18N
+        ad_out.setForeground(new java.awt.Color(255, 255, 204));
+        ad_out.setText("LogOut");
+        ad_out.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ad_outActionPerformed(evt);
+            }
+        });
+        jPanel2.add(ad_out, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 579, 110, 40));
+
+        jLabel41.setFont(new java.awt.Font("Niagara Engraved", 1, 55)); // NOI18N
+        jLabel41.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel41.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel41.setText("Personal Info");
+        jPanel2.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 40, 280, -1));
+
+        show_pass.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        show_pass.setForeground(new java.awt.Color(255, 0, 0));
+        show_pass.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        show_pass.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jPanel2.add(show_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 230, 230, 60));
+
+        jLabel42.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel42.setIcon(new javax.swing.ImageIcon(getClass().getResource("/project_trial/Pic/table.png"))); // NOI18N
+        jPanel2.add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1160, 660));
+
+        pane.addTab("Profile", jPanel2);
+
+        trainer.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jTable2.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Trainer Name", "Id", "Post", "Absent", "Working Hour", "Alloted Member", "Payment"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, true, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(jTable2);
+        if (jTable2.getColumnModel().getColumnCount() > 0) {
+            jTable2.getColumnModel().getColumn(0).setResizable(false);
+            jTable2.getColumnModel().getColumn(1).setResizable(false);
+            jTable2.getColumnModel().getColumn(2).setResizable(false);
+            jTable2.getColumnModel().getColumn(3).setResizable(false);
+            jTable2.getColumnModel().getColumn(4).setResizable(false);
+            jTable2.getColumnModel().getColumn(5).setResizable(false);
+            jTable2.getColumnModel().getColumn(6).setResizable(false);
+        }
+
+        trainer.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 180, 630, 190));
+
+        jButton2.setBackground(new java.awt.Color(0, 0, 0));
+        jButton2.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 153, 255));
+        jButton2.setText("Show");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        trainer.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 430, 110, 40));
+
+        T_Update_Btn.setBackground(new java.awt.Color(0, 0, 0));
+        T_Update_Btn.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        T_Update_Btn.setForeground(new java.awt.Color(204, 204, 255));
+        T_Update_Btn.setText("Update");
+        T_Update_Btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                T_Update_BtnActionPerformed(evt);
+            }
+        });
+        trainer.add(T_Update_Btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 430, 110, 40));
+
+        tid.setFont(new java.awt.Font("Comic Sans MS", 0, 11)); // NOI18N
+        tid.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tidActionPerformed(evt);
+            }
+        });
+        trainer.add(tid, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, 120, 30));
+
+        jLabel5.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Trainer Id");
+        trainer.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 100, 20));
+
+        jLabel6.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Post");
+        trainer.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, 60, 20));
+
+        tpost.setFont(new java.awt.Font("Comic Sans MS", 0, 11)); // NOI18N
+        trainer.add(tpost, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 220, 120, 30));
+
+        jLabel7.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Absent");
+        trainer.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 300, -1, -1));
+
+        jLabel8.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("Payment");
+        trainer.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 540, 80, 30));
+
+        jLabel9.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("Working Hour");
+        trainer.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 390, -1, -1));
+
+        tab.setFont(new java.awt.Font("Comic Sans MS", 0, 11)); // NOI18N
+        trainer.add(tab, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 300, 120, 30));
+
+        ttime.setFont(new java.awt.Font("Comic Sans MS", 0, 11)); // NOI18N
+        ttime.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ttimeActionPerformed(evt);
+            }
+        });
+        trainer.add(ttime, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 390, 120, 30));
+
+        tbill.setFont(new java.awt.Font("Comic Sans MS", 0, 11)); // NOI18N
+        trainer.add(tbill, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 540, 120, 30));
+
+        T_Select_btn.setBackground(new java.awt.Color(0, 0, 0));
+        T_Select_btn.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        T_Select_btn.setForeground(new java.awt.Color(255, 204, 204));
+        T_Select_btn.setText("Select");
+        T_Select_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                T_Select_btnActionPerformed(evt);
+            }
+        });
+        trainer.add(T_Select_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 70, 100, -1));
+
+        jLabel2.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Alloted Member");
+        trainer.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 470, -1, -1));
+
+        T_Clear_btn.setBackground(new java.awt.Color(0, 0, 0));
+        T_Clear_btn.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        T_Clear_btn.setForeground(new java.awt.Color(255, 0, 0));
+        T_Clear_btn.setText("Clear");
+        T_Clear_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                T_Clear_btnActionPerformed(evt);
+            }
+        });
+        trainer.add(T_Clear_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 140, 100, -1));
+        trainer.add(tcom, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 470, 120, 30));
+
+        jButton6.setBackground(new java.awt.Color(0, 0, 0));
+        jButton6.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        jButton6.setForeground(new java.awt.Color(0, 255, 0));
+        jButton6.setText("Add");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+        trainer.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 430, 100, 40));
+
+        T_delete_btn.setBackground(new java.awt.Color(0, 0, 0));
+        T_delete_btn.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        T_delete_btn.setForeground(new java.awt.Color(255, 153, 0));
+        T_delete_btn.setText("Delete");
+        T_delete_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                T_delete_btnActionPerformed(evt);
+            }
+        });
+        trainer.add(T_delete_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 430, 100, 40));
+
+        jLabel15.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel15.setText("Trainer Name");
+        trainer.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 100, 30));
+        trainer.add(tname, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 140, 120, 30));
+
+        jLabel44.setFont(new java.awt.Font("Niagara Engraved", 1, 36)); // NOI18N
+        jLabel44.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel44.setText("Trainer Information");
+        trainer.add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 100, 250, 40));
+
+        jButton8.setBackground(new java.awt.Color(0, 0, 0));
+        jButton8.setFont(new java.awt.Font("Niagara Engraved", 1, 18)); // NOI18N
+        jButton8.setForeground(new java.awt.Color(255, 255, 204));
+        jButton8.setText("Log Out");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+        trainer.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 520, 100, 40));
+
+        jLabel45.setIcon(new javax.swing.ImageIcon(getClass().getResource("/project_trial/Pic/1200X700(backsteel).png"))); // NOI18N
+        jLabel45.setText("jLabel45");
+        trainer.add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1160, 660));
+
+        pane.addTab("Trainer", trainer);
+
+        member.setBackground(new java.awt.Color(204, 204, 204));
+        member.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        member.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jTable1.setBorder(javax.swing.BorderFactory.createCompoundBorder());
+        jTable1.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Name", "Contact", "Blood Group", "Package", "Trainer", "Bill"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(0).setResizable(false);
+            jTable1.getColumnModel().getColumn(1).setResizable(false);
+            jTable1.getColumnModel().getColumn(2).setResizable(false);
+            jTable1.getColumnModel().getColumn(3).setResizable(false);
+            jTable1.getColumnModel().getColumn(4).setResizable(false);
+            jTable1.getColumnModel().getColumn(5).setResizable(false);
+            jTable1.getColumnModel().getColumn(6).setResizable(false);
+        }
+
+        member.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 1060, 410));
+
+        jButton1.setBackground(new java.awt.Color(0, 0, 0));
+        jButton1.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 153, 255));
+        jButton1.setText("Show");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        member.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 490, 120, 40));
+
+        m_del_btn.setBackground(new java.awt.Color(0, 0, 0));
+        m_del_btn.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        m_del_btn.setForeground(new java.awt.Color(255, 153, 51));
+        m_del_btn.setText("Delete");
+        m_del_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                m_del_btnActionPerformed(evt);
+            }
+        });
+        member.add(m_del_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(863, 540, 110, 40));
+
+        m_update_btn.setBackground(new java.awt.Color(0, 0, 0));
+        m_update_btn.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        m_update_btn.setForeground(new java.awt.Color(204, 204, 255));
+        m_update_btn.setText("Update");
+        m_update_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                m_update_btnActionPerformed(evt);
+            }
+        });
+        member.add(m_update_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 540, 100, 40));
+
+        jLabel4.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Member Id");
+        member.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 460, 100, 20));
+
+        mid.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        member.add(mid, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 460, 160, -1));
+
+        jLabel16.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel16.setText("Contact");
+        member.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 500, -1, -1));
+
+        mcom.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        member.add(mcom, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 500, 160, -1));
+
+        jLabel17.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel17.setText("Blood Group");
+        member.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 540, -1, -1));
+
+        jLabel18.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel18.setText("Package");
+        member.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 460, -1, -1));
+
+        mpac.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        member.add(mpac, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 460, 140, -1));
+
+        mbg.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        member.add(mbg, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 540, 160, -1));
+
+        jLabel19.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel19.setText("Trainer");
+        member.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 500, -1, -1));
+
+        jLabel20.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        jLabel20.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel20.setText("Bill");
+        member.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 540, -1, -1));
+
+        mtra.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        member.add(mtra, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 500, 140, -1));
+
+        mbill.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        member.add(mbill, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 540, 140, -1));
+
+        m_select_btn.setBackground(new java.awt.Color(0, 0, 0));
+        m_select_btn.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        m_select_btn.setForeground(new java.awt.Color(255, 204, 204));
+        m_select_btn.setText("Select");
+        m_select_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                m_select_btnActionPerformed(evt);
+            }
+        });
+        member.add(m_select_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 490, 100, 40));
+
+        m_clr_btn.setBackground(new java.awt.Color(0, 0, 0));
+        m_clr_btn.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        m_clr_btn.setForeground(new java.awt.Color(255, 0, 0));
+        m_clr_btn.setText("Clear");
+        m_clr_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                m_clr_btnActionPerformed(evt);
+            }
+        });
+        member.add(m_clr_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 490, 100, 40));
+
+        jButton7.setBackground(new java.awt.Color(0, 0, 0));
+        jButton7.setFont(new java.awt.Font("Niagara Engraved", 1, 18)); // NOI18N
+        jButton7.setForeground(new java.awt.Color(255, 255, 204));
+        jButton7.setText("Log Out");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+        member.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 570, 110, 40));
+
+        jLabel46.setIcon(new javax.swing.ImageIcon(getClass().getResource("/project_trial/Pic/1200X700(backsteel).png"))); // NOI18N
+        member.add(jLabel46, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1160, 660));
+
+        pane.addTab("Member", member);
+        member.getAccessibleContext().setAccessibleName("mem");
+
+        equip.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jTable3.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Equipment Name", "Quantity", "Condition", "Problem", "Last Servicing"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(jTable3);
+        if (jTable3.getColumnModel().getColumnCount() > 0) {
+            jTable3.getColumnModel().getColumn(0).setResizable(false);
+            jTable3.getColumnModel().getColumn(1).setResizable(false);
+            jTable3.getColumnModel().getColumn(2).setResizable(false);
+            jTable3.getColumnModel().getColumn(3).setResizable(false);
+            jTable3.getColumnModel().getColumn(4).setResizable(false);
+        }
+
+        equip.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 110, 610, -1));
+
+        jLabel1.setFont(new java.awt.Font("Niagara Engraved", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Active Equipments");
+        equip.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 20, 270, 60));
+
+        Select_btn.setBackground(new java.awt.Color(0, 0, 0));
+        Select_btn.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        Select_btn.setForeground(new java.awt.Color(255, 204, 204));
+        Select_btn.setText("Select");
+        Select_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Select_btnActionPerformed(evt);
+            }
+        });
+        equip.add(Select_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 120, 90, 40));
+
+        Show_btn.setBackground(new java.awt.Color(0, 0, 0));
+        Show_btn.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        Show_btn.setForeground(new java.awt.Color(255, 153, 255));
+        Show_btn.setText("Show");
+        Show_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Show_btnActionPerformed(evt);
+            }
+        });
+        equip.add(Show_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 560, 100, 40));
+
+        jLabel10.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText("Equipment Name");
+        equip.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 120, -1, 30));
+
+        jLabel11.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setText("Quantity");
+        equip.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 210, -1, -1));
+
+        jLabel12.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel12.setText("Condition");
+        equip.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 290, -1, -1));
+
+        jLabel13.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel13.setText("Problem");
+        equip.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 370, -1, -1));
+
+        jLabel14.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel14.setText("Last Servicing");
+        equip.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 450, -1, -1));
+
+        uname.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        uname.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                unameActionPerformed(evt);
+            }
+        });
+        equip.add(uname, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 120, 200, 30));
+
+        uqn.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        equip.add(uqn, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 210, 200, 30));
+
+        ucon.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        equip.add(ucon, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 290, 200, 30));
+
+        uprb.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        equip.add(uprb, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 370, 200, 30));
+
+        user.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        equip.add(user, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 450, 200, 30));
+
+        Add_btn.setBackground(new java.awt.Color(0, 0, 0));
+        Add_btn.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        Add_btn.setForeground(new java.awt.Color(0, 255, 0));
+        Add_btn.setText("Add");
+        Add_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Add_btnActionPerformed(evt);
+            }
+        });
+        equip.add(Add_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 560, 100, 40));
+
+        Update_Btn.setBackground(new java.awt.Color(0, 0, 0));
+        Update_Btn.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        Update_Btn.setForeground(new java.awt.Color(204, 204, 255));
+        Update_Btn.setText("Update");
+        Update_Btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Update_BtnActionPerformed(evt);
+            }
+        });
+        equip.add(Update_Btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 560, 90, 40));
+
+        Delete_btn.setBackground(new java.awt.Color(0, 0, 0));
+        Delete_btn.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        Delete_btn.setForeground(new java.awt.Color(255, 153, 51));
+        Delete_btn.setText("Delete");
+        Delete_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Delete_btnActionPerformed(evt);
+            }
+        });
+        equip.add(Delete_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 560, 90, 40));
+
+        Clear_btn.setBackground(new java.awt.Color(0, 0, 0));
+        Clear_btn.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        Clear_btn.setForeground(new java.awt.Color(255, 0, 0));
+        Clear_btn.setText("Clear");
+        Clear_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Clear_btnActionPerformed(evt);
+            }
+        });
+        equip.add(Clear_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 560, 90, 40));
+
+        jButton4.setBackground(new java.awt.Color(0, 0, 0));
+        jButton4.setFont(new java.awt.Font("Niagara Engraved", 1, 18)); // NOI18N
+        jButton4.setForeground(new java.awt.Color(255, 255, 204));
+        jButton4.setText("Log Out");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        equip.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 570, 100, 40));
+
+        jLabel47.setIcon(new javax.swing.ImageIcon(getClass().getResource("/project_trial/Pic/1200X700(backsteel).png"))); // NOI18N
+        equip.add(jLabel47, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1160, 660));
+
+        pane.addTab("Gym Instrument", equip);
+
+        bill.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        pie.setBackground(new java.awt.Color(0, 0, 0));
+        pie.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        pie.setForeground(new java.awt.Color(0, 255, 255));
+        pie.setText("Pie Chart");
+        pie.setActionCommand("");
+        pie.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pieActionPerformed(evt);
+            }
+        });
+        bill.add(pie, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 429, 100, 40));
+
+        jTable4.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Trainer Payment", "Current Bill", "Internet Bill", "Water Supply Bill", "New Equipment", "Acccessories", "Rent", "Others", "Month"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane4.setViewportView(jTable4);
+        if (jTable4.getColumnModel().getColumnCount() > 0) {
+            jTable4.getColumnModel().getColumn(0).setResizable(false);
+            jTable4.getColumnModel().getColumn(1).setResizable(false);
+            jTable4.getColumnModel().getColumn(2).setResizable(false);
+            jTable4.getColumnModel().getColumn(3).setResizable(false);
+            jTable4.getColumnModel().getColumn(4).setResizable(false);
+            jTable4.getColumnModel().getColumn(5).setResizable(false);
+            jTable4.getColumnModel().getColumn(6).setResizable(false);
+            jTable4.getColumnModel().getColumn(7).setResizable(false);
+            jTable4.getColumnModel().getColumn(8).setResizable(false);
+        }
+
+        bill.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 170, 790, 160));
+
+        tp.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        bill.add(tp, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 70, 130, -1));
+
+        jLabel21.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        jLabel21.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel21.setText("Trainer Payment");
+        bill.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, -1, -1));
+
+        jLabel22.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        jLabel22.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel22.setText("Current Bill");
+        bill.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 120, -1, -1));
+
+        cb.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        bill.add(cb, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 120, 130, -1));
+
+        jLabel23.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        jLabel23.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel23.setText("Internet Bill");
+        bill.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 170, -1, -1));
+
+        ib.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        bill.add(ib, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 170, 130, -1));
+
+        jLabel24.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        jLabel24.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel24.setText("Water Supply Bill");
+        bill.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, -1, -1));
+
+        wb.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        bill.add(wb, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 220, 130, -1));
+
+        jLabel25.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        jLabel25.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel25.setText("New Equipment");
+        bill.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 280, -1, -1));
+
+        jLabel26.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        jLabel26.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel26.setText("Accessories");
+        bill.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 330, -1, -1));
+
+        jLabel27.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        jLabel27.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel27.setText("Rent");
+        bill.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 380, -1, -1));
+
+        jLabel28.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        jLabel28.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel28.setText("Others");
+        bill.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 430, -1, -1));
+
+        ne.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        bill.add(ne, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 280, 130, -1));
+
+        ac.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        bill.add(ac, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 330, 130, -1));
+
+        r.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        bill.add(r, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 380, 130, -1));
+
+        o.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        bill.add(o, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 430, 130, -1));
+
+        equal.setFont(new java.awt.Font("Eras Bold ITC", 1, 24)); // NOI18N
+        equal.setText("=");
+        equal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                equalActionPerformed(evt);
+            }
+        });
+        bill.add(equal, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 490, 100, 30));
+
+        total.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        bill.add(total, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 540, 130, -1));
+
+        jLabel29.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        jLabel29.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel29.setText("Total Expense");
+        bill.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 530, -1, 40));
+
+        b_select_bn.setBackground(new java.awt.Color(0, 0, 0));
+        b_select_bn.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        b_select_bn.setForeground(new java.awt.Color(255, 204, 204));
+        b_select_bn.setText("Select");
+        b_select_bn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                b_select_bnActionPerformed(evt);
+            }
+        });
+        bill.add(b_select_bn, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 20, 100, 30));
+        bill.add(month, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
+
+        b_update_btn.setBackground(new java.awt.Color(0, 0, 0));
+        b_update_btn.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        b_update_btn.setForeground(new java.awt.Color(204, 204, 255));
+        b_update_btn.setText("Update");
+        b_update_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                b_update_btnActionPerformed(evt);
+            }
+        });
+        bill.add(b_update_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 430, 100, 40));
+
+        b_show_btn.setBackground(new java.awt.Color(0, 0, 0));
+        b_show_btn.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        b_show_btn.setForeground(new java.awt.Color(255, 153, 255));
+        b_show_btn.setText("Show");
+        b_show_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                b_show_btnActionPerformed(evt);
+            }
+        });
+        bill.add(b_show_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 430, 110, 40));
+
+        b_add_btn.setBackground(new java.awt.Color(0, 0, 0));
+        b_add_btn.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        b_add_btn.setForeground(new java.awt.Color(0, 255, 51));
+        b_add_btn.setText("Add");
+        b_add_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                b_add_btnActionPerformed(evt);
+            }
+        });
+        bill.add(b_add_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 430, 100, 40));
+
+        jButton3.setBackground(new java.awt.Color(0, 0, 0));
+        jButton3.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(255, 0, 0));
+        jButton3.setText("Clear");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        bill.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 430, 100, 40));
+
+        jLabel43.setFont(new java.awt.Font("Niagara Engraved", 1, 36)); // NOI18N
+        jLabel43.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel43.setText("Total Expense in one Month");
+        bill.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 90, -1, -1));
+
+        jButton5.setBackground(new java.awt.Color(0, 0, 0));
+        jButton5.setFont(new java.awt.Font("Niagara Engraved", 1, 18)); // NOI18N
+        jButton5.setForeground(new java.awt.Color(255, 255, 204));
+        jButton5.setText("Log out");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+        bill.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 510, 100, 40));
+
+        jLabel48.setIcon(new javax.swing.ImageIcon(getClass().getResource("/project_trial/Pic/1200X700(backsteel).png"))); // NOI18N
+        bill.add(jLabel48, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1160, 660));
+
+        pane.addTab("Billing", bill);
+
+        getContentPane().add(pane, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 1200, 690));
+        pane.getAccessibleContext().setAccessibleName("");
+
+        jLabel49.setIcon(new javax.swing.ImageIcon(getClass().getResource("/project_trial/Pic/steel_try.png"))); // NOI18N
+        getContentPane().add(jLabel49, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 700));
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void paneMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_paneMouseClicked
+
+    }//GEN-LAST:event_paneMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        if (button == 0) {
+            try {
+                Class.forName("com.mysql.jdbc.Driver");
+                database = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/kazi_gym", "root", "");
+                String sql = "select * from member_info ";
+                PreparedStatement p = database.prepareStatement(sql);
+                ResultSet ans = p.executeQuery();
+
+                while (ans.next()) {
+
+                    String id_info = ans.getString("id");
+                    String fname = ans.getString("firstname");
+                    String mob = ans.getString("mobile");
+                    String bl = ans.getString("bg");
+
+                    String pac = ans.getString("package");
+                    String tr = ans.getString("tr_name");
+                    String bill = ans.getString("bill");
+
+                    String tbdata[] = {id_info, fname, mob, bl, pac, tr, bill};
+                    DefaultTableModel tm = (DefaultTableModel) jTable1.getModel();
+                    tm.addRow(tbdata);
+                    button = 1;
+
+                }
+                database.close();
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        if (button2 == 0) {
+            try {
+                Class.forName("com.mysql.jdbc.Driver");
+                database = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/kazi_gym", "root", "");
+                String sql = "select * from trainer_details ";
+                PreparedStatement p = database.prepareStatement(sql);
+                ResultSet ans = p.executeQuery();
+
+                while (ans.next()) {
+
+                    String id_info = ans.getString("id");
+                    String name = ans.getString("name");
+                    String absent = ans.getString("absent");
+                    String post = ans.getString("post");
+
+                    String work = ans.getString("time");
+                    String cus = ans.getString("customer");
+                    String bill = ans.getString("payment");
+
+                    String tbdata[] = {name, id_info, post, absent, work, cus, bill};
+                    DefaultTableModel tm = (DefaultTableModel) jTable2.getModel();
+                    tm.addRow(tbdata);
+                    button2 = 1;
+
+                }
+                database.close();
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void tidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tidActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tidActionPerformed
+
+    private void ttimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ttimeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ttimeActionPerformed
+
+    private void T_Update_BtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_T_Update_BtnActionPerformed
+        String name = tname.getText();
+        String id = tid.getText();
+        String post = tpost.getText();
+        String absent = tab.getText();
+        String time = ttime.getText();
+        String customer = tcom.getText();
+        String bill = tbill.getText();
+
+        if (id.equals("")) {
+            JOptionPane.showMessageDialog(null, "Empty Trainer ID ", "Warning", JOptionPane.ERROR_MESSAGE);
+        } else {
+            try {
+
+                Class.forName("com.mysql.jdbc.Driver");
+                database = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/kazi_gym", "root", "");
+
+                String sql = "update trainer_details set name=?, post=?,absent=?, time=?,customer=?, payment=?  where id=?  ";
+
+                PreparedStatement p = database.prepareStatement(sql);
+
+                p.setString(1, name);
+                p.setString(2, post);
+                p.setString(3, absent);
+                p.setString(4, time);
+                p.setString(5, customer);
+                p.setString(6, bill);
+                p.setString(7, id);
+
+                p.executeUpdate();
+                updateTable2();
+                button2 = 1;
+                database.close();
+                JOptionPane.showMessageDialog(null, "Successfully Updated");
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+
+        }
+
+    }//GEN-LAST:event_T_Update_BtnActionPerformed
+
+    private void T_Select_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_T_Select_btnActionPerformed
+
+        String id = tid.getText();
+
+        if (id.equals("")) {
+            JOptionPane.showMessageDialog(null, " Empty Trainer ID", "Warning !!!", JOptionPane.ERROR_MESSAGE);
+        } else {
+            try {
+                Class.forName("com.mysql.jdbc.Driver");
+                database = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/kazi_gym", "root", "");
+                String sql = "select * from trainer_details where  id = ?";
+                PreparedStatement p = database.prepareStatement(sql);
+                p.setString(1, id);
+                ResultSet ans = p.executeQuery();
+
+                if (ans.next()) {
+                    String name = ans.getString("name");
+                    String po = ans.getString("post");
+                    String ab = ans.getString("absent");
+                    String t = ans.getString("time");
+                    String com = ans.getString("customer");
+                    String pay = ans.getString("payment");
+
+                    tname.setText(name);
+                    tpost.setText(po);
+                    tab.setText(ab);
+                    ttime.setText(t);
+                    tcom.setText(com);
+                    tbill.setText(pay);
+
+                    select_flag = 1;
+
+                } else {
+                    JOptionPane.showMessageDialog(null, " Invalid Id", "Warning", JOptionPane.ERROR_MESSAGE);
+                    tid.setText("");
+                }
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+        }
+    }//GEN-LAST:event_T_Select_btnActionPerformed
+
+    private void unameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_unameActionPerformed
+
+    }//GEN-LAST:event_unameActionPerformed
+
+    private void Add_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Add_btnActionPerformed
+        // Add_equipment ae = new Add_equipment();
+        //ae.setVisible(true);
+
+        String ename = uname.getText();
+        String quantity = uqn.getText();
+        String condition = ucon.getText();
+        String problem = uprb.getText();
+        String service = user.getText();
+
+        try {
+
+            if (ename.equals("") || quantity.equals("") || condition.equals("") || problem.equals("") || service.equals("")) {
+                JOptionPane.showMessageDialog(null, "Empty Field ", "Something Missing", JOptionPane.ERROR_MESSAGE);
+            } else {
+                Class.forName("com.mysql.jdbc.Driver");
+                com.mysql.jdbc.Connection databse = (com.mysql.jdbc.Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/kazi_gym", "root", "");
+                String sql = "insert into equipment (name,amount,state,problem,service) values (?,?,?,?,?)";
+                com.mysql.jdbc.PreparedStatement p = (com.mysql.jdbc.PreparedStatement) databse.prepareStatement(sql);
+                p.setString(1, ename);
+                p.setString(2, quantity);
+                p.setString(3, condition);
+                p.setString(4, problem);
+                p.setString(5, service);
+
+                p.executeUpdate();
+                updateTable();
+                databse.close();
+                JOptionPane.showMessageDialog(null, "Successfully Submitted", "Welcome", JOptionPane.PLAIN_MESSAGE);
+
+                uname.setText("");
+                uqn.setText("");
+                ucon.setText("");
+                uprb.setText("");
+                user.setText("");
+
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+
+
+    }//GEN-LAST:event_Add_btnActionPerformed
+
+    private void Select_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Select_btnActionPerformed
+        String name = uname.getText();
+
+        if (name.equals("")) {
+            JOptionPane.showMessageDialog(null, " Empty Equipment name  ", "Warning !!!", JOptionPane.ERROR_MESSAGE);
+        } else {
+
+            try {
+                Class.forName("com.mysql.jdbc.Driver");
+                database = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/kazi_gym", "root", "");
+                String sql = "select * from equipment where  name = ?";
+                PreparedStatement p = database.prepareStatement(sql);
+                p.setString(1, name);
+                ResultSet ans = p.executeQuery();
+
+                if (ans.next()) {
+
+                    String am = ans.getString("amount");
+                    String st = ans.getString("state");
+                    String pr = ans.getString("problem");
+                    String sr = ans.getString("service");
+
+                    uqn.setText(am);
+                    ucon.setText(st);
+                    uprb.setText(pr);
+                    user.setText(sr);
+                    gym_flag = 1;
+
+                } else {
+                    JOptionPane.showMessageDialog(null, " Invalid Equipment Name", "Warning", JOptionPane.ERROR_MESSAGE);
+                    uname.setText("");
+                }
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+        }
+    }//GEN-LAST:event_Select_btnActionPerformed
+
+    private void Update_BtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Update_BtnActionPerformed
+        String name = uname.getText();
+        String quantity = uqn.getText();
+        String condition = ucon.getText();
+        String problem = uprb.getText();
+        String service = user.getText();
+
+        if (name.equals("")) {
+            JOptionPane.showMessageDialog(null, " Empty Equipment Name ", "Warning", JOptionPane.ERROR_MESSAGE);
+        } else {
+            try {
+
+                Class.forName("com.mysql.jdbc.Driver");
+                database = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/kazi_gym", "root", "");
+
+                String sql = "update equipment set amount=?,state=?, problem=?, service=?  where name=?  ";
+                PreparedStatement p = database.prepareStatement(sql);
+
+                p.setString(1, quantity);
+                p.setString(2, condition);
+                p.setString(3, problem);
+                p.setString(4, service);
+                p.setString(5, name);
+
+                p.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Successfully Updated");
+                updateTable();
+                button3 = 1;
+                database.close();
+
+                uname.setText("");
+                uqn.setText("");
+                ucon.setText("");
+                uprb.setText("");
+                user.setText("");
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+        }
+    }//GEN-LAST:event_Update_BtnActionPerformed
+
+    private void Show_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Show_btnActionPerformed
+        if (button3 == 0) {
+            try {
+                Class.forName("com.mysql.jdbc.Driver");
+                database = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/kazi_gym", "root", "");
+                String sql = "select * from equipment ";
+                PreparedStatement p = database.prepareStatement(sql);
+                ResultSet ans = p.executeQuery();
+
+                while (ans.next()) {
+
+                    String name = ans.getString("name");
+                    String amount = ans.getString("amount");
+                    String condition = ans.getString("state");
+                    String problem = ans.getString("problem");
+
+                    String service = ans.getString("service");
+
+                    String tbdata[] = {name, amount, condition, problem, service};
+                    DefaultTableModel tm = (DefaultTableModel) jTable3.getModel();
+                    tm.addRow(tbdata);
+                    button3 = 1;
+
+                }
+                database.close();
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+        }
+    }//GEN-LAST:event_Show_btnActionPerformed
+
+    private void Delete_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Delete_btnActionPerformed
+        // remove_equipment re=new remove_equipment();
+        // re.setVisible(true);
+        String name = uname.getText();
+        if (gym_flag == 1) {
+
+            try {
+
+                Class.forName("com.mysql.jdbc.Driver");
+                database = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/kazi_gym", "root", "");
+
+                String sql = "delete from equipment where name=?  ";
+                PreparedStatement p = database.prepareStatement(sql);
+
+                p.setString(1, name);
+
+                p.execute();
+                JOptionPane.showMessageDialog(null, "Successfully Deleted");
+                updateTable();
+                database.close();
+
+                uname.setText("");
+                uqn.setText("");
+                ucon.setText("");
+                uprb.setText("");
+                user.setText("");
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Opps!! Unable to Delete the ID", "Missing", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }//GEN-LAST:event_Delete_btnActionPerformed
+
+    private void Clear_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Clear_btnActionPerformed
+        uname.setText("");
+        uqn.setText("");
+        ucon.setText("");
+        uprb.setText("");
+        user.setText("");
+    }//GEN-LAST:event_Clear_btnActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+
+        String name = tname.getText();
+        String id = tid.getText();
+        String post = tpost.getText();
+        String absent = tab.getText();
+        String time = ttime.getText();
+        String customer = tcom.getText();
+        String bill = tbill.getText();
+
+        try {
+
+            if (name.equals("") || id.equals("") || post.equals("") || absent.equals("") || time.equals("") || customer.equals("") || bill.equals("")) {
+                JOptionPane.showMessageDialog(null, "  Empty Field  ", "Something Missing ", JOptionPane.ERROR_MESSAGE);
+            } else {
+                Class.forName("com.mysql.jdbc.Driver");
+                com.mysql.jdbc.Connection databse = (com.mysql.jdbc.Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/kazi_gym", "root", "");
+                String sql = "insert into trainer_details (name,id,post,absent,time,customer,payment) values (?,?,?,?,?,?,?)";
+                com.mysql.jdbc.PreparedStatement p = (com.mysql.jdbc.PreparedStatement) databse.prepareStatement(sql);
+                p.setString(1, name);
+                p.setString(2, id);
+                p.setString(3, post);
+                p.setString(4, absent);
+                p.setString(5, time);
+                p.setString(6, customer);
+                p.setString(7, bill);
+
+                p.executeUpdate();
+                updateTable2();
+                databse.close();
+                JOptionPane.showMessageDialog(null, "Successfully Submitted", "Now Tell the Trainer to Register as Trainer", JOptionPane.PLAIN_MESSAGE);
+
+                tname.setText("");
+                tid.setText("");
+                tpost.setText("");
+                tab.setText("");
+                ttime.setText("");
+                tcom.setText("");
+                tbill.setText("");
+
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void T_Clear_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_T_Clear_btnActionPerformed
+        tname.setText("");
+        tid.setText("");
+        tpost.setText("");
+        tab.setText("");
+        ttime.setText("");
+        tcom.setText("");
+        tbill.setText("");
+    }//GEN-LAST:event_T_Clear_btnActionPerformed
+
+    private void T_delete_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_T_delete_btnActionPerformed
+        String id = tid.getText();
+        if (select_flag == 1) {
+            try {
+
+                Class.forName("com.mysql.jdbc.Driver");
+                database = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/kazi_gym", "root", "");
+
+                String sql = "delete from trainer_details where id=?  ";
+                PreparedStatement p = database.prepareStatement(sql);
+
+                p.setString(1, id);
+
+                p.execute();
+                JOptionPane.showMessageDialog(null, "Successfully Deleted");
+                updateTable2();
+                database.close();
+
+                tname.setText("");
+                tid.setText("");
+                tpost.setText("");
+                tab.setText("");
+                ttime.setText("");
+                tcom.setText("");
+                tbill.setText("");
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Opps!! Unable to Delete the ID", "Missing", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_T_delete_btnActionPerformed
+
+    private void pieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pieActionPerformed
+
+        String mn = SelectMonth();
+        String tt = tp.getText();
+        String cc = cb.getText();
+        String ii = ib.getText();
+        String ww = wb.getText();
+        String nn = ne.getText();
+        String aa = ac.getText();
+        String rere = r.getText();
+        String ott = o.getText();
+
+        if (tt.equals("") || cc.equals("") || ii.equals("") || ww.equals("") || nn.equals("") || aa.equals("") || rere.equals("") || ott.equals("")) {
+            JOptionPane.showMessageDialog(null, " Empty Data", "Expense Missing", JOptionPane.ERROR_MESSAGE);
+        } else {
+            try {
+                Class.forName("com.mysql.jdbc.Driver");
+                database = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/kazi_gym", "root", "");
+                String sql = "select * from bill_info where  month = ?";
+                PreparedStatement p = database.prepareStatement(sql);
+                p.setString(1, mn);
+                ResultSet ans = p.executeQuery();
+
+                if (ans.next()) {
+
+                    String pay = ans.getString("payment");
+                    String curr = ans.getString("current");
+                    String internet = ans.getString("internet");
+                    String water = ans.getString("water");
+                    String n = ans.getString("equipment");
+                    String a = ans.getString("accessories");
+                    String rent = ans.getString("rent");
+                    String other = ans.getString("others");
+                    String month = ans.getString("month");
+
+                    tp.setText(pay);
+                    cb.setText(curr);
+                    ib.setText(internet);
+                    wb.setText(water);
+                    ne.setText(n);
+                    ac.setText(a);
+                    r.setText(rent);
+                    o.setText(other);
+
+                } else {
+                    JOptionPane.showMessageDialog(null, " Invalid Equipment Name", "Warning", JOptionPane.ERROR_MESSAGE);
+                    uname.setText("");
+                }
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+
+            double t = Integer.parseInt(tp.getText());
+            double c = Integer.parseInt(cb.getText());
+            double i = Integer.parseInt(ib.getText());
+            double w = Integer.parseInt(wb.getText());
+            double n = Integer.parseInt(ne.getText());
+            double a = Integer.parseInt(ac.getText());
+            double re = Integer.parseInt(r.getText());
+            double ot = Integer.parseInt(o.getText());
+
+            double sum = t + c + i + w + n + a + re + ot;
+
+            DefaultPieDataset piechart = new DefaultPieDataset();
+            piechart.setValue("Trainer Payment =" + t + "Taka", new Double((t / sum) * 100));
+            piechart.setValue("Current Bill =" + c + "Taka", new Double((c / sum) * 100));
+            piechart.setValue("Internet Bill=" + i + "Taka", new Double((i / sum) * 100));
+            piechart.setValue("WaterSupply Bill=" + w + "Taka", new Double((w / sum) * 100));
+            piechart.setValue("New Equipment Bill=" + n + "Taka", new Double((n / sum) * 100));
+            piechart.setValue("Accessories=" + a + "Taka", new Double((a / sum) * 100));
+            piechart.setValue("Rent=" + re + "Taka", new Double((re / sum) * 100));
+            piechart.setValue("others=" + ot + "Taka", new Double((ot / sum) * 100));
+            JFreeChart chart = ChartFactory.createPieChart3D("Total Expense of " + mn, piechart, true, true, true);
+            PiePlot3D p = (PiePlot3D) chart.getPlot();
+            p.setAutoPopulateSectionOutlinePaint(true);
+            p.setAutoPopulateSectionPaint(true);
+            p.setBackgroundPaint(Color.WHITE);
+            ChartFrame frame = new ChartFrame(" Billing Info of " + mn, chart);
+            frame.setVisible(true);
+            frame.setBounds(350, 100, 800, 600);
+        }
+    }//GEN-LAST:event_pieActionPerformed
+
+    private void m_select_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_select_btnActionPerformed
+        String id = mid.getText();
+
+        if (id.equals("")) {
+            JOptionPane.showMessageDialog(null, " Empty Member ID ", "Warning !!!", JOptionPane.ERROR_MESSAGE);
+        } else {
+            try {
+                Class.forName("com.mysql.jdbc.Driver");
+                database = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/kazi_gym", "root", "");
+                String sql = "select * from member_info where  id = ?";
+                PreparedStatement p = database.prepareStatement(sql);
+                p.setString(1, id);
+                ResultSet ans = p.executeQuery();
+
+                if (ans.next()) {
+
+                    String mob = ans.getString("mobile");
+                    String bl = ans.getString("bg");
+                    String pac = ans.getString("package");
+                    String tr = ans.getString("tr_name");
+                    String pay = ans.getString("bill");
+
+                    mcom.setText(mob);
+                    mbg.setText(bl);
+                    mpac.setText(pac);
+                    mtra.setText(tr);
+                    mbill.setText(pay);
+
+                    member_flag = 1;
+
+                } else {
+                    JOptionPane.showMessageDialog(null, " Invalid Id", "Warning", JOptionPane.ERROR_MESSAGE);
+                    mid.setText("");
+                }
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+        }
+    }//GEN-LAST:event_m_select_btnActionPerformed
+
+    private void m_clr_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_clr_btnActionPerformed
+        mid.setText("");
+        mcom.setText("");
+        mbg.setText("");
+        mpac.setText("");
+        mtra.setText("");
+        mbill.setText("");
+    }//GEN-LAST:event_m_clr_btnActionPerformed
+
+    private void m_update_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_update_btnActionPerformed
+
+        String id = mid.getText();
+        String con = mcom.getText();
+        String bg = mbg.getText();
+        String pac = mpac.getText();
+        String tr = mtra.getText();
+        String bi = mbill.getText();
+
+        if (id.equals("")) {
+            JOptionPane.showMessageDialog(null, "Empty Member ID ", "Warning", JOptionPane.ERROR_MESSAGE);
+        } else {
+            try {
+
+                Class.forName("com.mysql.jdbc.Driver");
+                database = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/kazi_gym", "root", "");
+
+                String sql = "update member_info set mobile=?, bg=?,package=?, tr_name=?,bill=?  where id=?  ";
+
+                PreparedStatement p = database.prepareStatement(sql);
+
+                p.setString(1, con);
+                p.setString(2, bg);
+                p.setString(3, pac);
+                p.setString(4, tr);
+                p.setString(5, bi);
+                p.setString(6, id);
+
+                p.executeUpdate();
+                updateTable3();
+                button = 1;
+                database.close();
+                JOptionPane.showMessageDialog(null, "Successfully Updated");
+
+                mid.setText("");
+                mcom.setText("");
+                mbg.setText("");
+                mpac.setText("");
+                mtra.setText("");
+                mbill.setText("");
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+
+        }
+    }//GEN-LAST:event_m_update_btnActionPerformed
+
+    private void m_del_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_del_btnActionPerformed
+        String id = mid.getText();
+        if (member_flag == 1) {
+            try {
+
+                Class.forName("com.mysql.jdbc.Driver");
+                database = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/kazi_gym", "root", "");
+
+                String sql = "delete from member_info where id=?  ";
+                PreparedStatement p = database.prepareStatement(sql);
+
+                p.setString(1, id);
+
+                p.execute();
+                JOptionPane.showMessageDialog(null, "Successfully Deleted");
+                updateTable3();
+                database.close();
+
+                mid.setText("");
+                mcom.setText("");
+                mbg.setText("");
+                mpac.setText("");
+                mtra.setText("");
+                mbill.setText("");
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Opps!! Unable to Delete the ID", "Missing", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_m_del_btnActionPerformed
+
+    private void b_select_bnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_select_bnActionPerformed
+        String mn = SelectMonth();
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            database = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/kazi_gym", "root", "");
+            String sql = "select * from bill_info where  month = ?";
+            PreparedStatement p = database.prepareStatement(sql);
+            p.setString(1, mn);
+            ResultSet ans = p.executeQuery();
+
+            if (ans.next()) {
+
+                String pay = ans.getString("payment");
+                String curr = ans.getString("current");
+                String internet = ans.getString("internet");
+                String water = ans.getString("water");
+                String n = ans.getString("equipment");
+                String a = ans.getString("accessories");
+                String rent = ans.getString("rent");
+                String other = ans.getString("others");
+                String month = ans.getString("month");
+
+                tp.setText(pay);
+                cb.setText(curr);
+                ib.setText(internet);
+                wb.setText(water);
+                ne.setText(n);
+                ac.setText(a);
+                r.setText(rent);
+                o.setText(other);
+
+            } else {
+                JOptionPane.showMessageDialog(null, " Invalid Equipment Name", "Warning", JOptionPane.ERROR_MESSAGE);
+                uname.setText("");
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }//GEN-LAST:event_b_select_bnActionPerformed
+
+    private void equalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_equalActionPerformed
+        String tt = tp.getText();
+        String cc = cb.getText();
+        String ii = ib.getText();
+        String ww = wb.getText();
+        String nn = ne.getText();
+        String aa = ac.getText();
+        String rere = r.getText();
+        String ott = o.getText();
+
+        if (tt.equals("") || cc.equals("") || ii.equals("") || ww.equals("") || nn.equals("") || aa.equals("") || rere.equals("") || ott.equals("")) {
+            JOptionPane.showMessageDialog(null, " Empty Data", "Expense Missing", JOptionPane.ERROR_MESSAGE);
+        } else {
+            int t = Integer.parseInt(tp.getText());
+            int c = Integer.parseInt(cb.getText());
+            int i = Integer.parseInt(ib.getText());
+            int w = Integer.parseInt(wb.getText());
+            int n = Integer.parseInt(ne.getText());
+            int a = Integer.parseInt(ac.getText());
+            int re = Integer.parseInt(r.getText());
+            int ot = Integer.parseInt(o.getText());
+
+            int sum = t + c + i + w + n + a + re + ot;
+            total.setText(Integer.toString(sum));
+        }
+
+    }//GEN-LAST:event_equalActionPerformed
+
+    private void b_show_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_show_btnActionPerformed
+
+        if (button4 == 0) {
+            try {
+                Class.forName("com.mysql.jdbc.Driver");
+                database = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/kazi_gym", "root", "");
+                String sql = "select * from bill_info ";
+                PreparedStatement p = database.prepareStatement(sql);
+                ResultSet ans = p.executeQuery();
+
+                while (ans.next()) {
+
+                    String pay = ans.getString("payment");
+                    String curr = ans.getString("current");
+                    String internet = ans.getString("internet");
+                    String water = ans.getString("water");
+                    String ne = ans.getString("equipment");
+                    String ac = ans.getString("accessories");
+                    String rent = ans.getString("rent");
+                    String other = ans.getString("others");
+                    String month = ans.getString("month");
+
+                    String tbdata[] = {pay, curr, internet, water, ne, ac, rent, other, month};
+                    DefaultTableModel tm = (DefaultTableModel) jTable4.getModel();
+                    tm.addRow(tbdata);
+                    button4 = 1;
+
+                }
+                database.close();
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+        }
+
+
+    }//GEN-LAST:event_b_show_btnActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        tp.setText("");
+        cb.setText("");
+        ib.setText("");
+        wb.setText("");
+        ne.setText("");
+        ac.setText("");
+        r.setText("");
+        o.setText("");
+        total.setText("");
+
+
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void b_add_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_add_btnActionPerformed
+        String t = tp.getText();
+        String c = cb.getText();
+        String i = ib.getText();
+        String w = wb.getText();
+        String n = ne.getText();
+        String a = ac.getText();
+        String re = r.getText();
+        String ot = o.getText();
+        String m = SelectMonth();
+
+        try {
+
+            if (t.equals("") || c.equals("") || i.equals("") || w.equals("") || n.equals("") || a.equals("") || re.equals("") || ot.equals("")) {
+                JOptionPane.showMessageDialog(null, "Empty Field", "Something Missing", JOptionPane.ERROR_MESSAGE);
+            } else {
+                Class.forName("com.mysql.jdbc.Driver");
+                com.mysql.jdbc.Connection databse = (com.mysql.jdbc.Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/kazi_gym", "root", "");
+                String sql = "insert into bill_info (payment,current,internet,water,equipment,accessories,rent,others,month) values (?,?,?,?,?,?,?,?,?)";
+                com.mysql.jdbc.PreparedStatement p = (com.mysql.jdbc.PreparedStatement) databse.prepareStatement(sql);
+                p.setString(1, t);
+                p.setString(2, c);
+                p.setString(3, i);
+                p.setString(4, w);
+                p.setString(5, n);
+                p.setString(6, a);
+                p.setString(7, re);
+                p.setString(8, ot);
+                p.setString(9, m);
+
+                p.executeUpdate();
+                updateTable4();
+                databse.close();
+                JOptionPane.showMessageDialog(null, "Successfully Submitted", "Welcome", JOptionPane.PLAIN_MESSAGE);
+
+                tp.setText("");
+                cb.setText("");
+                ib.setText("");
+                wb.setText("");
+                ne.setText("");
+                ac.setText("");
+                r.setText("");
+                o.setText("");
+
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }//GEN-LAST:event_b_add_btnActionPerformed
+
+    private void b_update_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_update_btnActionPerformed
+
+        String t = tp.getText();
+        String c = cb.getText();
+        String i = ib.getText();
+        String w = wb.getText();
+        String n = ne.getText();
+        String a = ac.getText();
+        String re = r.getText();
+        String ot = o.getText();
+        String m = SelectMonth();
+
+        if (t.equals("") || c.equals("") || i.equals("") || w.equals("") || n.equals("") || a.equals("") || re.equals("") || ot.equals("")) {
+            JOptionPane.showMessageDialog(null, " Empty Data", "Expense Missing", JOptionPane.ERROR_MESSAGE);
+        } else {
+            try {
+
+                Class.forName("com.mysql.jdbc.Driver");
+                database = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/kazi_gym", "root", "");
+
+                String sql = "update bill_info set payment=?,current=?, internet=?, water=?,equipment=?,accessories=?,rent=?,others=?  where month=?  ";
+                PreparedStatement p = database.prepareStatement(sql);
+
+                p.setString(1, t);
+                p.setString(2, c);
+                p.setString(3, i);
+                p.setString(4, w);
+                p.setString(5, n);
+                p.setString(6, a);
+                p.setString(7, re);
+                p.setString(8, ot);
+                p.setString(9, m);
+
+                p.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Successfully Updated");
+                updateTable4();
+                button4 = 1;
+                database.close();
+
+                uname.setText("");
+                uqn.setText("");
+                ucon.setText("");
+                uprb.setText("");
+                user.setText("");
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+
+        }
+
+    }//GEN-LAST:event_b_update_btnActionPerformed
+
+    private void nidMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nidMouseEntered
+
+    }//GEN-LAST:event_nidMouseEntered
+
+    private void nidMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nidMouseExited
+
+    }//GEN-LAST:event_nidMouseExited
+
+    private void mobileMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mobileMouseEntered
+
+    }//GEN-LAST:event_mobileMouseEntered
+
+    private void mobileMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mobileMouseExited
+
+    }//GEN-LAST:event_mobileMouseExited
+
+    private void bgMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bgMouseEntered
+
+    }//GEN-LAST:event_bgMouseEntered
+
+    private void bgMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bgMouseExited
+
+    }//GEN-LAST:event_bgMouseExited
+
+    private void emailMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_emailMouseEntered
+
+    }//GEN-LAST:event_emailMouseEntered
+
+    private void emailMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_emailMouseExited
+
+    }//GEN-LAST:event_emailMouseExited
+
+    private void emailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_emailActionPerformed
+
+    private void l_nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_l_nameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_l_nameActionPerformed
+
+    private void ad_outActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ad_outActionPerformed
+        AdminLog adlg = new AdminLog();
+        adlg.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_ad_outActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        AdminLog adlg = new AdminLog();
+        adlg.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        AdminLog adlg = new AdminLog();
+        adlg.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        AdminLog adlg = new AdminLog();
+        adlg.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        AdminLog adlg = new AdminLog();
+        adlg.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(AdminMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(AdminMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(AdminMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(AdminMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new AdminMain().setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Add_btn;
+    private javax.swing.JButton Clear_btn;
+    private javax.swing.JButton Delete_btn;
+    private javax.swing.JButton Select_btn;
+    private javax.swing.JButton Show_btn;
+    private javax.swing.JButton T_Clear_btn;
+    private javax.swing.JButton T_Select_btn;
+    private javax.swing.JButton T_Update_Btn;
+    private javax.swing.JButton T_delete_btn;
+    private javax.swing.JButton Update_Btn;
+    private javax.swing.JTextField ac;
+    private javax.swing.JButton ad_out;
+    private javax.swing.JTextField age;
+    private javax.swing.JButton b_add_btn;
+    private javax.swing.JButton b_select_bn;
+    private javax.swing.JButton b_show_btn;
+    private javax.swing.JButton b_update_btn;
+    private javax.swing.JTextField bg;
+    private javax.swing.JPanel bill;
+    private javax.swing.JTextField cb;
+    private javax.swing.JTextField email;
+    private javax.swing.JButton equal;
+    private javax.swing.JPanel equip;
+    private javax.swing.JTextField f_name;
+    private javax.swing.JTextField gender;
+    private javax.swing.JTextField height;
+    private javax.swing.JTextField ib;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel37;
+    private javax.swing.JLabel jLabel38;
+    private javax.swing.JLabel jLabel39;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel41;
+    private javax.swing.JLabel jLabel42;
+    private javax.swing.JLabel jLabel43;
+    private javax.swing.JLabel jLabel44;
+    private javax.swing.JLabel jLabel45;
+    private javax.swing.JLabel jLabel46;
+    private javax.swing.JLabel jLabel47;
+    private javax.swing.JLabel jLabel48;
+    private javax.swing.JLabel jLabel49;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
+    private javax.swing.JTable jTable3;
+    private javax.swing.JTable jTable4;
+    private javax.swing.JTextField l_name;
+    private javax.swing.JButton m_clr_btn;
+    private javax.swing.JButton m_del_btn;
+    private javax.swing.JButton m_select_btn;
+    private javax.swing.JButton m_update_btn;
+    private javax.swing.JTextField mbg;
+    private javax.swing.JTextField mbill;
+    private javax.swing.JTextField mcom;
+    private javax.swing.JPanel member;
+    private javax.swing.JTextField mid;
+    private javax.swing.JTextField mobile;
+    private com.toedter.calendar.JMonthChooser month;
+    private javax.swing.JTextField mpac;
+    private javax.swing.JTextField mtra;
+    private javax.swing.JTextField ne;
+    private javax.swing.JTextField nid;
+    private javax.swing.JTextField o;
+    private javax.swing.JTabbedPane pane;
+    private javax.swing.JLabel pic;
+    private javax.swing.JButton pie;
+    private javax.swing.JTextField r;
+    private javax.swing.JLabel show_pass;
+    private javax.swing.JTextField tab;
+    private javax.swing.JTextField tbill;
+    private javax.swing.JTextField tcom;
+    private javax.swing.JTextField tid;
+    private javax.swing.JTextField tname;
+    private javax.swing.JTextField total;
+    private javax.swing.JTextField tp;
+    private javax.swing.JTextField tpost;
+    private javax.swing.JPanel trainer;
+    private javax.swing.JTextField ttime;
+    private javax.swing.JTextField ucon;
+    private javax.swing.JTextField uname;
+    private javax.swing.JTextField uprb;
+    private javax.swing.JTextField uqn;
+    private javax.swing.JTextField user;
+    private javax.swing.JTextField wb;
+    private javax.swing.JTextField weight;
+    // End of variables declaration//GEN-END:variables
+}
